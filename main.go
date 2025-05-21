@@ -59,7 +59,7 @@ func main() {
 	h.Write([]byte(bi.String()))
 	result := h.Sum(nil)
 	
-	key += fmt.Sprintf("%x", result)
+	key += fmt.Sprintf("-%x", result)
 	fmt.Printf("Buildinfo: %s\n\n", bi.String())
 	fmt.Printf("Hash: %s\n", key)
 }	
