@@ -2,7 +2,7 @@ package main
 
 import (
 	"cmp"
-	"crypto/sha256"
+	"crypto/md5"
 	"debug/buildinfo"
 	"fmt"
 	"log"
@@ -55,9 +55,11 @@ func main() {
 	})
 
 	// Hash the build info
-	h := sha256.New().Sum([]byte(bi.String()))
+	h := md5.New()
+	h.Write([]byte(bi.String()))
+	result := h.Sum(nil)
 	
-	key += fmt.Sprintf("%x", h)
-	fmt.Printf("Hash: %x\n", h)
-	fmt.Printf("Buildinfo: %s\n", bi.String())
+	key += fmt.Sprintf("%x", result)
+	fmt.Printf("Buildinfo: %s\n\n", bi.String())
+	fmt.Printf("Hash: %s\n", key)
 }	
